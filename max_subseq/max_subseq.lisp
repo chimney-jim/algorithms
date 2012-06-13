@@ -1,3 +1,13 @@
+;;Course:       CS4413
+;;Student name: Jim Fitzgerald
+;;Student ID:   000165563
+;;Assignment #: 1
+;;Due Date:     6/13/2012
+;;
+;;Signature:    _________________________
+;;
+;;Score:        __________
+
 (defpackage :max-subseq
   (:nicknames :max-subseq)
   (:use :cl))
@@ -39,9 +49,8 @@
                   (setf x (+ 1 x))))
     (comb1 list nil m)))
 
-(defun max-sum (list left right)
-  (let (max-left 0) (max-right 0) (left-sum 0) (right-sum 0) (center (/ (+ left right) 2))
-    (if (= left right)
-      (first list)
-      (nil))
-    (loop for i to left
+(defun max-sum (lst left right)
+  (let ((max-left 0) (max-right 0) (left-sum 0) (right-sum 0) (center (/ (+ left right) 2)))
+    (loop for i in lst
+          do (lambda (l m) (if (> l m)
+                (setf max-left left-sum))))))
