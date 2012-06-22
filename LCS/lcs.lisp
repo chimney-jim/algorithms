@@ -2,8 +2,8 @@
   (:use :cl)
   (:export :lcs))
 
-(defvar list1 '(A B C B D A B))
-(defvar list2 '(B D C A B A))
+(defvar list1 '(1 3 5 4 2 6 7))
+(defvar list2 '(8 3 4 9 2 1))
 
 (in-package :lcs)
 
@@ -14,18 +14,15 @@
     (setf c (make-array (list m n) :initial-element 0))
     (loop for i from 1 to (- m 1)
           do (loop for j from 1 to (- n 1)
-                   do (if (eq (car lst1) (car lst2))
-                        (lambda (c b i j) 
+                   do (if (eq (nth i lst1) (nth j lst2))
+                        (progn
                           (setf (aref c i j) (+ (aref c (- i 1) (- j 1)) 1))
-                          (setf (aref b i j) 1)
-                          (format t "1st cond") c b i j)
+                          (setf (aref b i j) 1))
                         (if (>= (aref c (- i 1) j) (aref c i (- j 1)))
-                          (lambda (c b i j) 
+                          (progn 
                             (setf (aref c i j) (aref c (- i 1) j))
-                            (setf (aref b i j) 2)
-                            (format t "2nd cond") c b i j)
-                           (lambda (c b i j) 
+                            (setf (aref b i j) 2))
+                           (progn 
                              (setf (aref c i j) (aref c i (- j 1)))
-                             (setf (aref b i j) 0)
-                             (format t "3rd cond") c b i j)))))
+                             (setf (aref b i j) 0))))))
     (list b c)))
