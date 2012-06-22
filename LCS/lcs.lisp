@@ -7,13 +7,6 @@
 
 (in-package :lcs)
 
-(defun show-board (board)
-  (loop for i below (car (array-dimensions board)) do
-        (loop for j below (cadr (array-dimensions board)) do
-              (let ((cell (aref board i j)))
-                (format t "~a" cell)))
-        (format t "~%")))
-
 (defun lcs (lst1 lst2)
   (let ((m (length lst1)) 
         (n (length lst2)))
