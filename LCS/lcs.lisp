@@ -1,6 +1,9 @@
 (defpackage :lcs
   (:use :cl))
 
+(defvar list1 '(A B C B D A B))
+(defvar list2 '(B D C A B A))
+
 (in-package :lcs)
 
 (defun show-board (board)
@@ -12,9 +15,9 @@
 
 (defun lcs (lst1 lst2)
   (let ((m (- (length lst1) 1)) 
-        (n (- (length lst2) 1))
-        (b (make-array '(m n)))
-        (c (make-array '(m n))))
+        (n (- (length lst2) 1)))
+    (setf b (make-array (list m n)))
+    (setf c (make-array (list m n)))
     (loop for i from 0 to m
           do (setf (aref c i 0) 0))
     (loop for j from 0 to n
