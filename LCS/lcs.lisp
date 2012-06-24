@@ -11,7 +11,8 @@
   (let* ((m (length lst1)) 
          (n (length lst2))
          (b (make-array (list (+ m 1) (+ n 1)) :initial-element 0))
-         (c (make-array (list (+ m 1) (+ n 1)) :initial-element 0)))
+         (c (make-array (list (+ m 1) (+ n 1)) :initial-element 0))
+         (return-list '()))
     (loop for i from 1 to m
             do (loop for j from 1 to n
                      do (if (eq (nth (- i 1) lst1) (nth (- j 1) lst2))
@@ -25,7 +26,10 @@
                             (progn 
                               (setf (aref c i j) (aref c i (- j 1)))
                               (setf (aref b i j) 0))))))
-   (list c b)))
+    (loop from (+ m 1) downto 0
+          do (loop from (+ n 1) downto 0
+                   do (cond ((or (zerop i) (zerop j)) return-list
+
 
 ;;(defvar dir-list (lcs list1 list2))
 
