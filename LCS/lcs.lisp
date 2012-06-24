@@ -26,9 +26,22 @@
                             (progn 
                               (setf (aref c i j) (aref c i (- j 1)))
                               (setf (aref b i j) 0))))))
-    (loop from (+ m 1) downto 0
-          do (loop from (+ n 1) downto 0
-                   do (cond ((or (zerop i) (zerop j)) return-list
+    (loop for i from m downto 0
+          do (loop for j from n downto 0
+                   do (cond ((eq (aref b i j) 1)
+                             (progn
+                               (append (list (nth i lst1)) return-list)
+                               (format t "1")))
+                            ((eq (aref b i j) 2)
+                             (progn
+                               (append (list (aref c (- i 1) j)) return-list)
+                               (format t "2")))
+                            ((eq (aref b i j) 0)
+                             (progn
+                               (append (list (aref c i (- j 1))) return-list)
+                               (format t "0")))
+                            ((or (zerop i) (zerop j)) return-list))))
+    return-list))
 
 
 ;;(defvar dir-list (lcs list1 list2))
