@@ -30,7 +30,7 @@
           do (loop for j from n downto 0
                    do (cond ((eq (aref b i j) 1)
                              (progn
-                               (append (list (nth i lst1)) return-list)
+                               (append (list (nth i lst1))) return-list)
                                (format t "1")))
                             ((eq (aref b i j) 2)
                              (progn
@@ -40,7 +40,7 @@
                              (progn
                                (append (list (aref c i (- j 1))) return-list)
                                (format t "0")))
-                            ((or (zerop i) (zerop j)) return-list))))
+                            ((or (zerop i) (zerop j)) return-list)))
     return-list))
 
 
