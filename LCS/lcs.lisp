@@ -2,15 +2,15 @@
   (:use :cl)
   (:export :lcs))
 
-(defvar list1 '(1 2 3 2 4 1 2))
-(defvar list2 '(2 4 3 1 2 1))
+(defvar list1 '(A B C B D A B))
+(defvar list2 '(B D C A B A))
 
 (in-package :lcs)
 
 (defun lcs (lst1 lst2)
   (let* ((m (length lst1)) 
          (n (length lst2))
-         (b (make-array (list (+ m 1) (+ n 1)) :initial-element 0))
+         (b (make-array (list (+ m 1) (+ n 1)) :initial-element 3))
          (c (make-array (list (+ m 1) (+ n 1)) :initial-element 0))
          (return-list '()))
     (loop for i from 1 to m
@@ -26,25 +26,16 @@
                             (progn 
                               (setf (aref c i j) (aref c i (- j 1)))
                               (setf (aref b i j) 0))))))
-    (loop for i from m downto 0
-          do (loop for j from n downto 0
-                   do (cond ((eq (aref b i j) 1)
+    (loop while (/= (aref b m n) 3) do
+                         (cond ((eq (aref b m n) 1)
                              (progn
-                               (append (list (nth i lst1))) return-list)
-                               (format t "1")))
-                            ((eq (aref b i j) 2)
+                               (decf m)
+                               (decf n)
+                               (setf return-list (append (list (nth m lst1)) return-list))))
+                            ((eq (aref b m n) 2)
                              (progn
-                               (append (list (aref c (- i 1) j)) return-list)
-                               (format t "2")))
-                            ((eq (aref b i j) 0)
+                               (decf m)))
+                            ((eq (aref b m n) 0)
                              (progn
-                               (append (list (aref c i (- j 1))) return-list)
-                               (format t "0")))
-                            ((or (zerop i) (zerop j)) return-list)))
+                               (decf n)))))
     return-list))
-
-
-;;(defvar dir-list (lcs list1 list2))
-
-;;(defvar print-lcs (dir-list lst1 lst2)
-;;  (let ((m (length 
