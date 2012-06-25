@@ -1,3 +1,13 @@
+;;Course:       CS4413
+;;Student Name: Jim Fitzgerald
+;;Student ID:   000165563
+;;Assignment #: 2
+;;Due Date:     06/25/2012
+;;
+;;Signature:    ______________________
+;;
+;;Score:        __________
+
 (defpackage :lcs
   (:use :cl)
   (:export :lcs))
